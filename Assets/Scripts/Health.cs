@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Sahne yönetimi için gerekli
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
         // if its not player destroy
         else
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

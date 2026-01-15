@@ -35,7 +35,6 @@ public class SmartPatrolAI : MonoBehaviour
         // Check if we reached the patrol point
         else if (Vector2.Distance(transform.position, currentTarget) < 0.2f)
         {
-            // Reached A or B! Turn around
             SwitchTarget();
         }
     }

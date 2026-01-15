@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool isGrounded;
+    private bool isFacingRight = true; // player's face dir
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Input processing
+        // Move input
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         // Ground check
@@ -31,11 +32,32 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
+
+        // Flipping logic
+        if (horizontalInput > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0 && isFacingRight)
+        {
+            Flip();
+        }
     }
 
     void FixedUpdate()
     {
         // Apply physics movement
         rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
+    }
+
+    // Flipping method
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        
+        // Rotate 180 deg
+        Vector3 rot = transform.eulerAngles;
+        rot.y += 180;
+        transform.eulerAngles = rot;
     }
 }
