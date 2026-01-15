@@ -26,6 +26,12 @@ public class Health : MonoBehaviour
             Die();
         }
     }
+    
+    public void HealFull()
+    {
+        currentHealth = maxHealth;
+        Debug.Log("Player healed to full health!");
+    }
 
     void Die()
     {
