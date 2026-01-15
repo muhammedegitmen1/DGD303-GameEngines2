@@ -17,7 +17,7 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             // Fire1: Left Click or Left Ctrl
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
