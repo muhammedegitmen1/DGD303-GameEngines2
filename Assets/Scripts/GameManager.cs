@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
     
     public void PlayAgain()
     {
+        levelObjects[currentLevelIndex].GetComponent<SceneReset>().ResetAllObjects();
         MovePlayerToSpawn(currentLevelIndex);
             
         // Heal the player

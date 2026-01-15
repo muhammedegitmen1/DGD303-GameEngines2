@@ -9,8 +9,10 @@ public class CollapsingPlatform : MonoBehaviour
     private Rigidbody2D rb;
     private bool isFalling = false;
     private Vector3 startPosition;
+    
     void Start()
     {
+        startPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
         // Ensure platform stays in air initially
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -44,31 +46,20 @@ public class CollapsingPlatform : MonoBehaviour
 
     void DeactivatePlatform()
     {
-        transform.parent.gameObject.SetActive(false);
+         rb.bodyType = RigidbodyType2D.Static;
+         rb.gravityScale = 0f;
+         isFalling = false;
     }
-
-    public void ActivatePlatform()
-    {
-        transform.parent.gameObject.SetActive(true);
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.gravityScale = 1f; 
-        isFalling = false;
-    }
-    
     
     public void ResetPlatform()
     {
-       
         StopAllCoroutines();
         isFalling = false;
-
-    
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation; 
-
- 
+        rb.gravityScale = 0f; 
         transform.position = startPosition;
         transform.rotation = Quaternion.identity;
 

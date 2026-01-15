@@ -5350,7 +5350,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655045034}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8afdd430411dd4a45be30e80a7f3db99, type: 3}
   m_Name: 
@@ -9513,6 +9513,10 @@ PrefabInstance:
     - target: {fileID: 538171517124288124, guid: 5a354d6b4c99242a69cf427bac04d910, type: 3}
       propertyPath: m_Name
       value: Moving Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3596543055522487716, guid: 5a354d6b4c99242a69cf427bac04d910, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.51
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
