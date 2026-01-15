@@ -10,7 +10,8 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers; 
 
     private float nextAttackTime = 0f;
-
+    public Animator animator;
+    
     void Update()
     {
         if (Time.time >= nextAttackTime)
@@ -27,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         // for animation
-        // animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
 
         // find enemies at attack point
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);

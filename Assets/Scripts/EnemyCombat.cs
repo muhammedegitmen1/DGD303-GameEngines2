@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class EnemyCombat : MonoBehaviour
 {
     public int damage = 1;
@@ -11,9 +11,15 @@ public class EnemyCombat : MonoBehaviour
 
     private float nextAttackTime = 0f;
     private Transform player;
+    
+    public Animator anim;
+    private SmartPatrolAI patrolScript;
 
     void Start()
     {
+        //anim = GetComponent<Animator>();
+        patrolScript = GetComponent<SmartPatrolAI>();
+        
         // Find the player automatically by Tag
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -46,6 +52,14 @@ public class EnemyCombat : MonoBehaviour
 
     void Attack()
     {
+        
+        anim.SetTrigger("Attack");
+        
+        if (patrolScript != null)
+        {
+            StartCoroutine(PauseMovementForAttack());
+        }
+        
         // 1. Detect player in range of the attack point
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
@@ -59,6 +73,15 @@ public class EnemyCombat : MonoBehaviour
                 Debug.Log("Enemy attacked the player!");
             }
         }
+    }
+    
+    IEnumerator PauseMovementForAttack()
+    {
+        patrolScript.StopMoving(true);
+        
+        yield return new WaitForSeconds(0.6f); 
+
+        patrolScript.StopMoving(false);
     }
 
     // Visualize the attack range in Editor

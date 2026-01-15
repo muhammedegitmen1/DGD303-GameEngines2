@@ -11,10 +11,13 @@ public class SmartPatrolAI : MonoBehaviour
 
     private Vector3 currentTarget;
 
+    public Animator anim;
+    
     void Start()
     {
         // Set initial target to Point B
         currentTarget = pointB.position;
+        //anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -36,6 +39,22 @@ public class SmartPatrolAI : MonoBehaviour
         else if (Vector2.Distance(transform.position, currentTarget) < 0.2f)
         {
             SwitchTarget();
+        }
+        
+        anim.SetBool("isWalking", true);
+    }
+    
+    public void StopMoving(bool stop)
+    {
+        if(stop)
+        {
+            speed = 0;
+            anim.SetBool("isWalking", false);
+        }
+        else
+        {
+            speed = 2f; // Varsayılan hızın neyse ona döndür
+            anim.SetBool("isWalking", true);
         }
     }
 

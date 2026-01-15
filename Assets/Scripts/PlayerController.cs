@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private bool isGrounded;
     private bool isFacingRight = true; // player's face dir
-
+    
+    public Animator animator; 
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +34,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
-
+    
+        // 4. ANIMATION LOGIC
+        // Set 'Speed' to absolute value (always positive). 0 = Idle, >0 = Run
+        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        
+        // Set 'IsJumping' based on ground state. If not grounded, we are jumping/falling.
+        animator.SetBool("IsJumping", !isGrounded);
+        
         // Flipping logic
         if (horizontalInput > 0 && !isFacingRight)
         {
