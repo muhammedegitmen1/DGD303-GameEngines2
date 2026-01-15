@@ -8,7 +8,7 @@ public class CollapsingPlatform : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isFalling = false;
-
+    private Vector3 startPosition;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +37,41 @@ public class CollapsingPlatform : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 2.5f; 
         
-        Destroy(transform.parent.gameObject, destroyDelay);
+        //Destroy(transform.parent.gameObject, destroyDelay);
+        Invoke(nameof(DeactivatePlatform), destroyDelay);
     }
+
+    void DeactivatePlatform()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
+
+    public void ActivatePlatform()
+    {
+        transform.parent.gameObject.SetActive(true);
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 1f; 
+        isFalling = false;
+    }
+    
+    
+    public void ResetPlatform()
+    {
+       
+        StopAllCoroutines();
+        isFalling = false;
+
+    
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation; 
+
+ 
+        transform.position = startPosition;
+        transform.rotation = Quaternion.identity;
+
+        gameObject.SetActive(true);
+    }
+    
 }
