@@ -18,7 +18,7 @@ public class SmartPatrolAI : MonoBehaviour
     
     void Awake() // Start yerine Awake kullanmak daha güvenli
     {
-        startPosition = transform.position;
+        startPosition = Vector3.zero;
         startRotation = transform.rotation;
         healthScript = GetComponent<Health>();
     }
@@ -27,7 +27,7 @@ public class SmartPatrolAI : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        transform.position = startPosition;
+        transform.localPosition = Vector3.zero;
         transform.rotation = startRotation;
 
         if (healthScript != null)
@@ -35,7 +35,8 @@ public class SmartPatrolAI : MonoBehaviour
             healthScript.ResetHealth();
         }
 
-        currentTarget = pointB.position;
+        currentTarget = pointA.position;
+        speed = 2f;
     }
     
     void Update()
@@ -78,6 +79,7 @@ public class SmartPatrolAI : MonoBehaviour
 
     void SwitchTarget()
     {
+        Debug.LogWarning("SWITCHING TARGET DIR");
         // Determine which point we were going to, and swap it
         // Also rotate the character to face the new direction
         
