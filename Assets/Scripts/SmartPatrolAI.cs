@@ -12,14 +12,32 @@ public class SmartPatrolAI : MonoBehaviour
     private Vector3 currentTarget;
 
     public Animator anim;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    private Health healthScript;
     
-    void Start()
+    void Awake() // Start yerine Awake kullanmak daha güvenli
     {
-        // Set initial target to Point B
-        currentTarget = pointB.position;
-        //anim = GetComponent<Animator>();
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        healthScript = GetComponent<Health>();
     }
+    
+    public void ResetEnemy()
+    {
+        gameObject.SetActive(true);
 
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+
+        if (healthScript != null)
+        {
+            healthScript.ResetHealth();
+        }
+
+        currentTarget = pointB.position;
+    }
+    
     void Update()
     {
         // 1. Move towards the current target

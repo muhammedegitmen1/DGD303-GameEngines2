@@ -6,7 +6,10 @@ public class Health : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
 
-    
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
     
     void Start()
     {
@@ -32,7 +35,7 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
         Debug.Log("Player healed to full health!");
     }
-
+    
     void Die()
     {
         // if player dies restart level
@@ -41,10 +44,10 @@ public class Health : MonoBehaviour
             //restart level
             GameManager.instance.OpenLosePanel();
         }
-        // if its not player destroy
+        // if its not player, deactivate
         else
         {
-            Destroy(transform.parent.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

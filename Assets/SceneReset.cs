@@ -17,6 +17,11 @@ public class SceneReset : MonoBehaviour
         {
             platform.ResetPlatform();
         }
+        
+        foreach (SmartPatrolAI enemy in enemies)
+        {
+            enemy.ResetEnemy();
+        }
         Debug.Log(gameObject.name + " resetlendi.");
     }
 }
