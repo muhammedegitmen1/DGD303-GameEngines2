@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         Debug.LogWarning("index level: " + currentLevelIndex);
         Time.timeScale = 0.001f;
 
-        if (currentLevelIndex < 2)
+        if (currentLevelIndex < 1)
         {
             winPanel.SetActive(true);
         }

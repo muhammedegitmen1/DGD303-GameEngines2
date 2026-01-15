@@ -14,6 +14,7 @@ public class CollapsingPlatform : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // Ensure platform stays in air initially
         rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
