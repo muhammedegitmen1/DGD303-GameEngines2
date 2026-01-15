@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
 
+    
+    
     void Start()
     {
         currentHealth = maxHealth;
@@ -30,6 +32,7 @@ public class Health : MonoBehaviour
         // if player dies restart level
         if (gameObject.CompareTag("Player"))
         {
+            //restart level
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         // if its not player destroy
