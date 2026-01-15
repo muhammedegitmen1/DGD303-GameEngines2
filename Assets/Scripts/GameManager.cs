@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Health playerHealth;
 
     public GameObject winPanel;
+    public GameObject losePanel;
+    public GameObject finishPanel;
 
     void Awake()
     {
@@ -49,8 +51,56 @@ public class GameManager : MonoBehaviour
 
     public void OpenWinPanel()
     {
+        Debug.LogWarning("index level: " + currentLevelIndex);
         Time.timeScale = 0.001f;
-        winPanel.SetActive(true);
+
+        if (currentLevelIndex < 2)
+        {
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            finishPanel.SetActive(true);
+        }
+        
+        
+    }
+    
+    public void OpenLosePanel()
+    {
+        Time.timeScale = 0.001f;
+        losePanel.SetActive(true);
+    }
+
+    public void ReplayFromStart()
+    {
+        finishPanel.SetActive(false);
+        levelObjects[currentLevelIndex].SetActive(false);
+        
+        currentLevelIndex = 0;
+        levelObjects[0].SetActive(true);
+        
+        MovePlayerToSpawn(currentLevelIndex);
+        if (playerHealth != null)
+        {
+            playerHealth.HealFull();
+        }
+        Time.timeScale = 1;
+    }
+    
+    public void PlayAgain()
+    {
+        MovePlayerToSpawn(currentLevelIndex);
+            
+        // Heal the player
+        if (playerHealth != null)
+        {
+            playerHealth.HealFull(); // We need to add this method to Health.cs
+        }
+        
+        Time.timeScale = 1f;
+        losePanel.SetActive(false);
+        
     }
     
     public void NextLevel()
@@ -76,12 +126,15 @@ public class GameManager : MonoBehaviour
                 playerHealth.HealFull(); // We need to add this method to Health.cs
             }
             
+            winPanel.SetActive(false);
             Time.timeScale = 1f;
         }
         else
         {
             Debug.Log("Game Finished! You beat all levels.");
             // Show Win Screen
+            Time.timeScale = 0.001f;
+            finishPanel.SetActive(true);
         }
     }
 

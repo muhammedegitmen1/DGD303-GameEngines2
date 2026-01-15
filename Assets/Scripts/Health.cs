@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             //restart level
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameManager.instance.OpenLosePanel();
         }
         // if its not player destroy
         else
